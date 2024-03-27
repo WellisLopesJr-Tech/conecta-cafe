@@ -1,1 +1,4 @@
 dotnet new mvc -o ConectaCafe
+
+dotnet add package Microsoft.EntityFrameworkCore --version 7.0.17
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 7.0.17
