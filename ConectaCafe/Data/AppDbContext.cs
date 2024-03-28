@@ -23,7 +23,21 @@ public class AppDbContext : DbContext
 
         // FluentAPI
         #region muitos para muitos do BlogTag
-        
+        builder.Entity<BlogTag>().HasKey(
+            bt => new {bt.BlogId, bt.TagId}
+        );
+
+        builder.Entity<BlogTag>()
+            .HasOne(bt => bt.Blog)
+            .WithMany(b => b.BlogTags)
+            .HasForeignKey(bt => bt.BlogId);
+
+        builder.Entity<BlogTag>()
+            .HasOne(bt => bt.Tag)
+            .WithMany(t => t.BlogTags)
+            .HasForeignKey(bt => bt.TagId);
         #endregion
+
     }
+
 }
