@@ -2,3 +2,9 @@ dotnet new mvc -o ConectaCafe
 
 dotnet add package Microsoft.EntityFrameworkCore --version 7.0.17
 dotnet add package Microsoft.EntityFrameworkCore.Tools --version 7.0.17
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 7.0.17
+
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 7.0.12
+dotnet tool install -g dotnet-aspnet-codegenerator --version 7.0.1
+
+dotnet-aspnet-codegenerator controller -name CategoriasController -m Categoria -dc AppDbContext -outDir Controllers -udl
