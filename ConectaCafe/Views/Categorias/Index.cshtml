@@ -16,9 +16,9 @@
                     </a>
                 </div>
             </div>
-            <div class="card-body px-0 pb-2">
+            <div class="card-body pb-2">
                 <div class="table-responsive p-0">
-                    <table class="table align-items-center justify-content-center mb-0 w-100">
+                    <table id="dataTable" class="table align-items-center justify-content-center mb-0 w-100">
                         <thead>
                             <tr>
                                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Nome
@@ -54,3 +54,20 @@
         </div>
     </div>
 </div>
+
+@section Scripts 
+{
+    <script>
+        let datatable = new DataTable('#dataTable', {
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/2.0.3/i18n/pt-BR.json'
+            },
+            initComplete: function(settings, json) {
+                document.querySelector('.dt-length').classList.add('text-xs');
+                document.querySelector('.dt-search').classList.add('text-xs');
+                document.querySelector('.dt-info').classList.add('text-xs');
+                document.querySelector('.dt-paging').classList.add('text-xs');
+            }
+        });
+    </script>
+}
