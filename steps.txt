@@ -8,3 +8,5 @@ dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 7.
 dotnet tool install -g dotnet-aspnet-codegenerator --version 7.0.1
 
 dotnet-aspnet-codegenerator controller -name CategoriasController -m Categoria -dc AppDbContext -outDir Controllers -udl
+
+dotnet-aspnet-codegenerator controller -name ProdutosController -m Produto -dc AppDbContext -outDir Controllers -l "~/Views/Shared/_LayoutAdmin.cshtml"
