@@ -14,7 +14,7 @@ public class Produto
     [StringLength(60, ErrorMessage = "O nome deve possuir no máximo 60 caracteres")]
     public string Nome { get; set; }   
 
-    [Display(Name = "Descrição", Prompt = "Descrição")]
+    [Display(Name = "Descrição")]
     [StringLength(200, ErrorMessage = "A descrição deve possuir no máximo 200 caracteres")]
     public string Descricao { get; set; }   
 
