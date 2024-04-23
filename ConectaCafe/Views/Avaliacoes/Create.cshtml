@@ -1,6 +1,6 @@
-@model ConectaCafe.Models.Produto
+@model ConectaCafe.Models.Avaliacao
 @{
-    ViewData["Title"] = "Produtos";
+    ViewData["Title"] = "Avaliações";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -10,49 +10,46 @@
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-warning shadow-dark border-radius-lg pt-4 pb-3">
                     <h5 class="text-white text-capitalize ps-3 mb-0">@ViewData["Title"]</h5>
-                    <h6 class="text-white text-capitalize ps-3">Alterar</h6>
+                    <h6 class="text-white text-capitalize ps-3">Adicionar</h6>
                 </div>
             </div>
             <div class="card-body pb-2">
-                <form asp-action="Edit" class="row" enctype="multipart/form-data">
+                <form asp-action="Create" class="row" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Id">
                     <div class="col-lg-8 col-md-9">
                         <div class="col-12 mb-3">
                             <div class="input-group input-group-outline mb-1">
-                                <label asp-for="Nome" class="form-label"></label>
-                                <input asp-for="Nome" class="form-control" />
+                                <label asp-for="Pessoa" class="form-label"></label>
+                                <input asp-for="Pessoa" class="form-control" />
                             </div>
-                            <span asp-validation-for="Nome" class="text-danger text-sm"></span>
+                            <span asp-validation-for="Pessoa" class="text-danger text-sm"></span>
                         </div>
                         <div class="col-12 mb-3">
                             <div class="input-group input-group-outline mb-1">
-                                <label asp-for="Descricao" class="form-label"></label>
-                                <textarea asp-for="Descricao" class="form-control" rows="3"></textarea>
+                                <label asp-for="Texto" class="form-label"></label>
+                                <textarea asp-for="Texto" class="form-control" rows="3"></textarea>
                             </div>
-                            <span asp-validation-for="Descricao" class="text-danger text-sm"></span>
+                            <span asp-validation-for="Texto" class="text-danger text-sm"></span>
                         </div>
                         <div class="row">
-                            <div class="col-8 mb-3">
+                            <div class="col-6 mb-3">
                                 <div class="input-group input-group-outline mb-1">
-                                    <label asp-for="CategoriaId" class="form-label"></label>
-                                    <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.CategoriaId">
-                                        <option></option>
-                                    </select>
+                                    <label asp-for="Nota" class="form-label"></label>
+                                    <input asp-for="Nota" class="form-control" />
                                 </div>
-                                <span asp-validation-for="CategoriaId" class="text-danger text-sm"></span>
+                                <span asp-validation-for="Nota" class="text-danger text-sm"></span>
                             </div>
-                            <div class="col-4 mb-3">
+                            <div class="col-6 mb-3">
                                 <div class="input-group input-group-outline mb-1">
-                                    <label asp-for="Preco" class="form-label"></label>
-                                    <input asp-for="Preco" class="form-control" />
+                                    <label asp-for="DataAvaliacao" class="form-label"></label>
+                                    <input asp-for="DataAvaliacao" class="form-control" />
                                 </div>
-                                <span asp-validation-for="Preco" class="text-danger text-sm"></span>
+                                <span asp-validation-for="DataAvaliacao" class="text-danger text-sm"></span>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-3 d-flex justify-content-center">
-                        <img id="Preview" src='@(Model.Foto ?? Url.Content("~/img/sem-foto.jfif"))' class="w-75" alt="Foto" onclick="changeImage()">
+                        <img id="Preview" src="~/img/sem-foto.jfif" class="w-75" alt="Foto" onclick="changeImage()">
                         <input type="hidden" asp-for="Foto">
                         <input type="file" id="Arquivo" name="Arquivo" accept=".jpg,.jpeg,.png,.gif,.jfif" hidden>
                     </div>

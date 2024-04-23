@@ -1,5 +1,4 @@
 @model IEnumerable<ConectaCafe.Models.Produto>
-
 @{
     ViewData["Title"] = "Produtos";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -10,28 +9,28 @@
         <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div
-                    class="bg-gradient-warning shadow-dark border-radius-lg pt-4 pb-3 d-flex  align-items-center justify-content-between">
+                    class="bg-gradient-warning shadow-dark border-radius-lg pt-4 pb-3 d-flex align-items-center justify-content-between">
                     <h5 class="text-white text-capitalize ps-3 m-0">@ViewData["Title"]</h5>
                     <a asp-action="Create" class="text-white text-capitalize ps-3 me-3 d-flex align-items-center">
-                        <i class="material-icons">add</i> Adicionar
+                        <i class="material-icons me-2">add</i> Adicionar
                     </a>
                 </div>
             </div>
             <div class="card-body pb-2">
                 <div class="table-responsive p-0">
                     <table id="dataTable" class="table align-items-center justify-content-center mb-0 w-100">
-                        <thead>
+                        <thead class="p-0">
                             <tr>
                                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                     Nome
                                 </th>
-                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                     Categoria
                                 </th>
-                                <th class="text-uppercase text-secondary text-xs text-start font-weight-bolder opacity-7 ps-2">
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-start">
                                     Preço
                                 </th>
-                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                     Ações
                                 </th>
                             </tr>
@@ -46,18 +45,18 @@
                                     <td class="text-dark text-sm">
                                         @Html.DisplayFor(modelItem => item.Categoria.Nome)
                                     </td>
-                                    <td class="text-dark text-start text-sm">
+                                    <td class="text-dark text-sm text-start">
                                         @Html.DisplayFor(modelItem => item.Preco)
                                     </td>
                                     <td>
                                         <a asp-action="Edit" asp-route-id="@item.Id" title="Alterar">
-                                            <i class="material-icons">edit</i>
+                                            <i class="material-icons me-2">edit</i>
                                         </a>
                                         <a asp-action="Details" asp-route-id="@item.Id" title="Detalhes">
-                                            <i class="material-icons">search</i>
+                                            <i class="material-icons me-2">search</i>
                                         </a>
                                         <a asp-action="Delete" asp-route-id="@item.Id" title="Excluir">
-                                            <i class="material-icons">delete</i>
+                                            <i class="material-icons me-2">delete</i>
                                         </a>
                                     </td>
                                 </tr>
@@ -75,9 +74,9 @@
     <script>
         let datatable = new DataTable('#dataTable', {
             language: {
-                url: 'https://cdn.datatables.net/plug-ins/2.0.3/i18n/pt-BR.json'
+                url: '../../lib/datatables/pt-BR.json'
             },
-            initComplete: function (settings, json) {
+            initComplete: function(settings, json) {
                 document.querySelector('.dt-length').classList.add('text-xs');
                 document.querySelector('.dt-search').classList.add('text-xs');
                 document.querySelector('.dt-info').classList.add('text-xs');

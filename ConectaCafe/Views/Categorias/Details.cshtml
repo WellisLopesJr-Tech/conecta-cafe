@@ -5,11 +5,11 @@
 }
 
 <div class="row">
-    <div class="col-6 mx-auto">
+    <div class="col-lg-6 mx-auto">
         <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-warning shadow-dark border-radius-lg pt-4 pb-3">
-                    <h5 class="text-white text-capitalize ps-3 m-0">@ViewData["Title"]</h5>
+                    <h5 class="text-white text-capitalize ps-3 mb-0">@ViewData["Title"]</h5>
                     <h6 class="text-white text-capitalize ps-3">Detalhes</h6>
                 </div>
             </div>
@@ -24,9 +24,10 @@
                     <div class="mb-3">
                         <a asp-action="Edit" asp-route-id="@Model.Id"
                             class="btn btn-warning me-2">Alterar</a>
-                        <a asp-action="Index" class="btn btn-info">Voltar</a>   
-                    </div>
+                        <a asp-action="Index" class="btn btn-info">Voltar</a>
+                    </div> @* primary secondary warning danger info dark success *@
                 </div>
+
             </div>
         </div>
     </div>

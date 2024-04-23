@@ -5,11 +5,11 @@
 }
 
 <div class="row">
-    <div class="col-6 mx-auto">
+    <div class="col-lg-6 mx-auto">
         <div class="card my-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                 <div class="bg-gradient-warning shadow-dark border-radius-lg pt-4 pb-3">
-                    <h5 class="text-white text-capitalize ps-3 m-0">@ViewData["Title"]</h5>
+                    <h5 class="text-white text-capitalize ps-3 mb-0">@ViewData["Title"]</h5>
                     <h6 class="text-white text-capitalize ps-3">Alterar</h6>
                 </div>
             </div>
@@ -19,18 +19,18 @@
                     <input type="hidden" asp-for="Id">
                     <div class="col-12 mb-3">
                         <div class="input-group input-group-outline mb-1">
-                        <label asp-for="Nome" class="form-label"></label>
-                        <input asp-for="Nome" class="form-control" />
+                            <label asp-for="Nome" class="form-label"></label>
+                            <input asp-for="Nome" class="form-control" />
                         </div>
                         <span asp-validation-for="Nome" class="text-danger text-sm"></span>
                     </div>
                     <div class="mb-3">
                         <input type="submit" value="Salvar" class="btn btn-success me-3" />
-                         <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+                        <a asp-action="Index" class="btn btn-danger">Cancelar</a>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
 </div>
-

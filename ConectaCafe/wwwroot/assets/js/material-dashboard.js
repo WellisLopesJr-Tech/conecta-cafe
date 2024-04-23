@@ -558,7 +558,7 @@ window.onload = function() {
     inputs[i].addEventListener('focus', function(e) {
       this.parentElement.classList.add('is-focused');
     }, false);
-
+    
     inputs[i].onkeyup = function(e) {
       if (this.value != "") {
         this.parentElement.classList.add('is-filled');

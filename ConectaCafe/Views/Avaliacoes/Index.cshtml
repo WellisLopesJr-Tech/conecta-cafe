@@ -1,6 +1,6 @@
-@model IEnumerable<ConectaCafe.Models.Categoria>
+@model IEnumerable<ConectaCafe.Models.Avaliacao>
 @{
-    ViewData["Title"] = "Categorias";
+    ViewData["Title"] = "Avaliações";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
@@ -21,8 +21,14 @@
                     <table id="dataTable" class="table align-items-center justify-content-center mb-0 w-100">
                         <thead class="p-0">
                             <tr>
-                                <th class="p-0 text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
-                                    Nome
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                    Pessoa
+                                </th>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
+                                    Data
+                                </th>
+                                <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 text-start">
+                                    Nota
                                 </th>
                                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">
                                     Ações
@@ -34,7 +40,13 @@
                             {
                                 <tr>
                                     <td class="text-dark text-sm">
-                                        @Html.DisplayFor(modelItem => item.Nome)
+                                        @Html.DisplayFor(modelItem => item.Pessoa)
+                                    </td>
+                                    <td class="text-dark text-sm">
+                                        @Html.DisplayFor(modelItem => item.DataAvaliacao)
+                                    </td>
+                                    <td class="text-dark text-sm text-start">
+                                        @Html.DisplayFor(modelItem => item.Nota)
                                     </td>
                                     <td>
                                         <a asp-action="Edit" asp-route-id="@item.Id" title="Alterar">

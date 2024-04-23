@@ -1,49 +1,60 @@
 @model ConectaCafe.Models.Produto
-
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Produtos";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h1>Details</h1>
+<div class="row">
+    <div class="col">
+        <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-warning shadow-dark border-radius-lg pt-4 pb-3">
+                    <h5 class="text-white text-capitalize ps-3 mb-0">@ViewData["Title"]</h5>
+                    <h6 class="text-white text-capitalize ps-3">Detalhes</h6>
+                </div>
+            </div>
+            <div class="card-body pb-2">
+                <div class="row">
+                    <div class="col-lg-8 col-md-9">
+                        <div class="col-12 mb-3">
+                            <div class="input-group input-group-outline mb-1">
+                                <label asp-for="Nome" class="form-label"></label>
+                                <input asp-for="Nome" class="form-control" readonly />
+                            </div>
+                        </div>
+                        <div class="col-12 mb-3">
+                            <div class="input-group input-group-outline mb-1">
+                                <label asp-for="Descricao" class="form-label"></label>
+                                <textarea asp-for="Descricao" class="form-control" rows="3" readonly></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-8 mb-3">
+                                <div class="input-group input-group-outline mb-1">
+                                    <label asp-for="CategoriaId" class="form-label"></label>
+                                    <input asp-for="Categoria.Nome" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="input-group input-group-outline mb-1">
+                                    <label asp-for="Preco" class="form-label"></label>
+                                    <input asp-for="Preco" class="form-control" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-3 d-flex justify-content-center">
+                        <img id="Preview" src='@(Model.Foto ?? Url.Content("~/img/sem-foto.jfif"))' class="w-75" alt="Foto">
+                    </div>
 
-<div>
-    <h4>Produto</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descricao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descricao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Preco)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Preco)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Foto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Foto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Categoria)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Categoria.Nome)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                    <div class="mb-3">
+                        <a asp-action="Edit" asp-route-id="@Model.Id"
+                            class="btn btn-warning me-2">Alterar</a>
+                        <a asp-action="Index" class="btn btn-info">Voltar</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>

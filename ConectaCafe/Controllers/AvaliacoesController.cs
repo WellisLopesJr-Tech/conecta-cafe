@@ -6,106 +6,101 @@ using ConectaCafe.Models;
 
 namespace ConectaCafe.Controllers
 {
-    public class ProdutosController : Controller
+    public class AvaliacoesController : Controller
     {
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _host;
 
-        public ProdutosController(AppDbContext context, IWebHostEnvironment host)
+        public AvaliacoesController(AppDbContext context, IWebHostEnvironment host)
         {
             _context = context;
             _host = host;
         }
 
-        // GET: Produtos
+        // GET: Avaliacoes
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Produtos.Include(p => p.Categoria);
-            return View(await appDbContext.ToListAsync());
+            return View(await _context.Avaliacoes.ToListAsync());
         }
 
-        // GET: Produtos/Details/5
+        // GET: Avaliacoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Produtos == null)
+            if (id == null || _context.Avaliacoes == null)
             {
                 return NotFound();
             }
 
-            var produto = await _context.Produtos
-                .Include(p => p.Categoria)
+            var avaliacao = await _context.Avaliacoes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (produto == null)
+            if (avaliacao == null)
             {
                 return NotFound();
             }
 
-            return View(produto);
+            return View(avaliacao);
         }
 
-        // GET: Produtos/Create
+        // GET: Avaliacoes/Create
         public IActionResult Create()
         {
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nome");
             return View();
         }
 
-        // POST: Produtos/Create
+        // POST: Avaliacoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Descricao,Preco,Foto,CategoriaId")] Produto produto, IFormFile Arquivo)
+        public async Task<IActionResult> Create([Bind("Id,Pessoa,Texto,Nota,DataAvaliacao,Foto")] Avaliacao avaliacao, IFormFile Arquivo)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(produto);
+                _context.Add(avaliacao);
                 await _context.SaveChangesAsync();
 
                 if (Arquivo != null)
                 {
-                    string filename = produto.Id + Path.GetExtension(Arquivo.FileName);
-                    string caminho = Path.Combine(_host.WebRootPath, "img\\produtos");
+                    string filename = avaliacao.Id + Path.GetExtension(Arquivo.FileName);
+                    string caminho = Path.Combine(_host.WebRootPath, "img\\avaliacoes");
                     string novoArquivo = Path.Combine(caminho, filename);
                     using (var stream = new FileStream(novoArquivo, FileMode.Create))
                     {
                         Arquivo.CopyTo(stream);
                     }
-                    produto.Foto = "\\img\\produtos\\" + filename;
+                    avaliacao.Foto = "\\img\\avaliacoes\\" + filename;
                     await _context.SaveChangesAsync();
                 }
 
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nome", produto.CategoriaId);
-            return View(produto);
+            return View(avaliacao);
         }
 
-        // GET: Produtos/Edit/5
+        // GET: Avaliacoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Produtos == null)
+            if (id == null || _context.Avaliacoes == null)
             {
                 return NotFound();
             }
 
-            var produto = await _context.Produtos.FindAsync(id);
-            if (produto == null)
+            var avaliacao = await _context.Avaliacoes.FindAsync(id);
+            if (avaliacao == null)
             {
                 return NotFound();
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nome", produto.CategoriaId);
-            return View(produto);
+            return View(avaliacao);
         }
 
-        // POST: Produtos/Edit/5
+        // POST: Avaliacoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Descricao,Preco,Foto,CategoriaId")] Produto produto, IFormFile Arquivo)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Pessoa,Texto,Nota,DataAvaliacao,Foto")] Avaliacao avaliacao, IFormFile Arquivo)
         {
-            if (id != produto.Id)
+            if (id != avaliacao.Id)
             {
                 return NotFound();
             }
@@ -116,21 +111,22 @@ namespace ConectaCafe.Controllers
                 {
                     if (Arquivo != null)
                     {
-                        string filename = produto.Id + Path.GetExtension(Arquivo.FileName);
-                        string caminho = Path.Combine(_host.WebRootPath, "img\\produtos");
+                        string filename = avaliacao.Id + Path.GetExtension(Arquivo.FileName);
+                        string caminho = Path.Combine(_host.WebRootPath, "img\\avaliacoes");
                         string novoArquivo = Path.Combine(caminho, filename);
                         using (var stream = new FileStream(novoArquivo, FileMode.Create))
                         {
                             Arquivo.CopyTo(stream);
                         }
-                        produto.Foto = "\\img\\produtos\\" + filename;
+                        avaliacao.Foto = "\\img\\avaliacoes\\" + filename;
+                        await _context.SaveChangesAsync();
                     }
-                    _context.Update(produto);
+                    _context.Update(avaliacao);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProdutoExists(produto.Id))
+                    if (!AvaliacaoExists(avaliacao.Id))
                     {
                         return NotFound();
                     }
@@ -141,51 +137,49 @@ namespace ConectaCafe.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoriaId"] = new SelectList(_context.Categorias, "Id", "Nome", produto.CategoriaId);
-            return View(produto);
+            return View(avaliacao);
         }
 
-        // GET: Produtos/Delete/5
+        // GET: Avaliacoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Produtos == null)
+            if (id == null || _context.Avaliacoes == null)
             {
                 return NotFound();
             }
 
-            var produto = await _context.Produtos
-                .Include(p => p.Categoria)
+            var avaliacao = await _context.Avaliacoes
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (produto == null)
+            if (avaliacao == null)
             {
                 return NotFound();
             }
 
-            return View(produto);
+            return View(avaliacao);
         }
 
-        // POST: Produtos/Delete/5
+        // POST: Avaliacoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Produtos == null)
+            if (_context.Avaliacoes == null)
             {
-                return Problem("Entity set 'AppDbContext.Produtos'  is null.");
+                return Problem("Entity set 'AppDbContext.Avaliacoes'  is null.");
             }
-            var produto = await _context.Produtos.FindAsync(id);
-            if (produto != null)
+            var avaliacao = await _context.Avaliacoes.FindAsync(id);
+            if (avaliacao != null)
             {
-                _context.Produtos.Remove(produto);
+                _context.Avaliacoes.Remove(avaliacao);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProdutoExists(int id)
+        private bool AvaliacaoExists(int id)
         {
-            return _context.Produtos.Any(e => e.Id == id);
+            return _context.Avaliacoes.Any(e => e.Id == id);
         }
     }
 }

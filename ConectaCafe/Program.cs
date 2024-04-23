@@ -6,10 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-string conexao =  builder.Configuration.GetConnectionString("CafeDb");
+string conexao = builder.Configuration
+    .GetConnectionString("CafeDb");
 builder.Services.AddDbContext<AppDbContext>(
     opt => opt.UseSqlServer(conexao)
 );
+
 
 var app = builder.Build();
 
